@@ -108,7 +108,7 @@ class EasyRefresh extends StatefulWidget {
   }
 
   /// 触发时超过距离
-  static double callOverExtent = 30.0;
+  static double callOverExtent = 2.0;
 
   /// 默认构造器
   /// 将child转换为CustomScrollView可用的slivers
@@ -364,15 +364,17 @@ class _EasyRefreshState extends State<EasyRefresh> {
         _scrollerController.positions.isEmpty ||
         _taskNotifier.value.refreshing) return;
     _callRefreshNotifier.value = true;
-    _scrollerController
-        .animateTo(-0.0001,
-            duration: Duration(milliseconds: duration.inMilliseconds - 100),
-            curve: Curves.linear)
-        .whenComplete(() {
-      _scrollerController.animateTo(
-          -(_header.triggerDistance + EasyRefresh.callOverExtent),
-          duration: Duration(milliseconds: 100),
-          curve: Curves.linear);
+        _scrollerController.animateTo(-(_header.triggerDistance + EasyRefresh.callOverExtent),
+        duration: duration, curve: Curves.linear);
+    // _scrollerController
+    //     .animateTo(-0.0001,
+    //         duration: Duration(milliseconds: duration.inMilliseconds - 100),
+    //         curve: Curves.linear)
+    //     .whenComplete(() {
+    //   _scrollerController.animateTo(
+    //       -(_header.triggerDistance + EasyRefresh.callOverExtent),
+    //       duration: Duration(milliseconds: 100),
+    //       curve: Curves.linear);
     });
   }
 
